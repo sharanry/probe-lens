@@ -1,6 +1,7 @@
-from probe_lens.probes import LinearProbe
 import torch
 import torch.nn as nn
+
+from probe_lens.probes import LinearProbe
 
 
 def test_linear_probe():

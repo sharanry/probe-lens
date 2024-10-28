@@ -77,5 +77,10 @@ def test_linear_probe_visualization():
     assert plot is not None
     # assert isinstance(plot, plt.Figure)
     accuracy = accuracy_score(y.argmax(dim=1).cpu(), model(x).argmax(dim=1).cpu())
-    f2_score = fbeta_score(y.argmax(dim=1).cpu(), model(x).argmax(dim=1).cpu(), beta=2, average='weighted')
-    assert plot.gca().get_title() == f"Confusion Matrix (Accuracy: {accuracy:.4f}, F2 Score: {f2_score:.4f})"
+    f2_score = fbeta_score(
+        y.argmax(dim=1).cpu(), model(x).argmax(dim=1).cpu(), beta=2, average="weighted"
+    )
+    assert (
+        plot.gca().get_title()
+        == f"Confusion Matrix (Accuracy: {accuracy:.4f}, F2 Score: {f2_score:.4f})"
+    )

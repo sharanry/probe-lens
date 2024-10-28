@@ -15,7 +15,9 @@ class LinearProbe(nn.Module):
     def forward(self, x):
         return self.linear(x)
 
-    def visualize_performance(self, dataloader: torch.utils.data.DataLoader, test=False):
+    def visualize_performance(
+        self, dataloader: torch.utils.data.DataLoader, test=False
+    ):
         preds = []
         gts = []
         for X, y in dataloader:
@@ -27,15 +29,28 @@ class LinearProbe(nn.Module):
         gts = torch.cat(gts)
 
         accuracy = accuracy_score(gts.cpu(), preds.cpu())
-        f2_score = fbeta_score(gts.cpu(), preds.cpu(), beta=2, average='weighted')
+        f2_score = fbeta_score(gts.cpu(), preds.cpu(), beta=2, average="weighted")
 
         cm = confusion_matrix(gts.cpu(), preds.cpu())
         plt.figure(figsize=(10, 7))
-        _class_names = self.class_names if self.class_names else [str(i) for i in range(cm.shape[0])]
-        sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=_class_names, yticklabels=_class_names)
+        _class_names = (
+            self.class_names
+            if self.class_names
+            else [str(i) for i in range(cm.shape[0])]
+        )
+        sns.heatmap(
+            cm,
+            annot=True,
+            fmt="d",
+            cmap="Blues",
+            xticklabels=_class_names,
+            yticklabels=_class_names,
+        )
         plt.xlabel("Predicted")
         plt.ylabel("True")
-        plt.title(f"Confusion Matrix (Accuracy: {accuracy:.4f}, F2 Score: {f2_score:.4f})")
+        plt.title(
+            f"Confusion Matrix (Accuracy: {accuracy:.4f}, F2 Score: {f2_score:.4f})"
+        )
         if not test:
             plt.show()
         return plt
@@ -60,7 +75,10 @@ class LinearProbe(nn.Module):
                 optimizer.step()
                 loss_sum += loss.item()
                 if val_dataloader is not None:
-                    dataset_names, datasets = ["train", "val"], [dataloader, val_dataloader]
+                    dataset_names, datasets = (
+                        ["train", "val"],
+                        [dataloader, val_dataloader],
+                    )
                 else:
                     dataset_names, datasets = ["train"], [dataloader]
                 if verbose and (epoch + 1) % 10 == 0:

@@ -13,6 +13,8 @@ torch = "^2.5.0"
 matplotlib = "^3.9.2"
 scikit-learn = "^1.5.2"
 seaborn = "^0.13.2"
+sae-lens = "^4.0.9"
+transformer-lens = "^2.8.1"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.5.1"

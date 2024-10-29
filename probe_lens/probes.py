@@ -55,13 +55,25 @@ class LinearProbe(nn.Module):
             plt.show()
         return plt
 
+    def accuracy(self, dataloader: torch.utils.data.DataLoader):
+        preds = []
+        gts = []
+        for X, y in dataloader:
+            pred = self(X)
+            gt = y.argmax(dim=1)
+            preds.append(pred.argmax(dim=1))
+            gts.append(gt)
+        preds = torch.cat(preds)
+        gts = torch.cat(gts)
+        return (preds == gts).sum().item() / len(preds)
+
     def train_probe(
         self,
         dataloader: torch.utils.data.DataLoader,
         optimizer: torch.optim.Optimizer,
         val_dataloader: torch.utils.data.DataLoader | None = None,
         loss_fn: nn.Module = nn.BCEWithLogitsLoss(),
-        epochs: int = 10,
+        epochs: int = 1000,
         verbose: bool = True,
     ):
         tqdm_epochs = tqdm(range(epochs), desc="Training Probe", unit="epoch")

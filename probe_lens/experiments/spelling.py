@@ -1,5 +1,7 @@
 from typing import Callable
 
+import requests
+
 from probe_lens.experiments.experiments import ProbeExperiment
 
 LETTERS = "abcdefghijklmnopqrstuvwxyz"
@@ -17,7 +19,7 @@ def first_letter_index(word: str):
 class FirstLetterSpelling(ProbeExperiment):
     def __init__(
         self,
-        words: list[str],
+        words: list[str] = requests.get(WORDS_DATASET).text.splitlines(),
         prompt_fn: Callable[[str], str] = default_spelling_prompt_generator,
         class_fn: Callable[[str], int] = first_letter_index,
     ):
@@ -25,12 +27,16 @@ class FirstLetterSpelling(ProbeExperiment):
         self.words = words
         self.prompt_fn = prompt_fn
         self.class_fn = class_fn
+        self.class_names = list(LETTERS)
         self.generate_data()
 
     def generate_data(self):
-        self.classes = [self.class_fn(word) for word in self.words]
         self.prompts = [self.prompt_fn(word) for word in self.words]
+        self.classes = [self.class_fn(word) for word in self.words]
         self.data = list(zip(self.prompts, self.classes))
 
     def get_data(self) -> list[tuple[str, int]]:
         return self.data
+
+    def get_classes(self) -> list[str]:
+        return self.class_names

@@ -44,7 +44,7 @@ def test_linear_probe_training():
         optimizer=torch.optim.SGD(model.parameters(), lr=0.01),
         val_dataloader=dataloader,
         loss_fn=nn.MSELoss(),
-        epochs=1000,
+        epochs=5000,
         verbose=True,
     )
     print("Model weights: ", model.linear.weight)
@@ -84,3 +84,4 @@ def test_linear_probe_visualization():
         plot.gca().get_title()
         == f"Confusion Matrix (Accuracy: {accuracy:.4f}, F2 Score: {f2_score:.4f})"
     )
+    assert model.accuracy(dataloader) == accuracy

@@ -43,7 +43,7 @@ We initialize a linear probe with the same number of outputs as classes in the e
 ```python
 from probe_lens.probes import LinearProbe
 X, y = next(iter(dataloader))
-probe = LinearProbe(X.shape[1], y.shape[1], class_names=spelling_task.get_classes())
+probe = LinearProbe(X.shape[1], y.shape[1], class_names=spelling_task.get_classes(), device=DEVICE)
 ```
 
 #### Train probe
@@ -58,6 +58,7 @@ We use the `visualize_performance` method to visualize the performance of the pr
 ```python
 plot = probe.visualize_performance(dataloader)
 ```
+![Confusion Matrix](confusion_matrix.png)
 
 
 ## Roadmap
@@ -80,4 +81,9 @@ plot = probe.visualize_performance(dataloader)
 - [x] Add f2 score and accuracy
 - [ ] Add more visualization experiments
     - [ ] ... ?
+
+### Documentation
+- [ ] Add docstrings
+- [ ] Add tutorials
+- [ ] Reproduce experiments from major papers (SAE-Spelling, etc.)
 

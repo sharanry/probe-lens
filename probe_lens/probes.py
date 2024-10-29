@@ -30,14 +30,13 @@ class LinearProbe(nn.Module):
 
         accuracy = accuracy_score(gts.cpu(), preds.cpu())
         f2_score = fbeta_score(gts.cpu(), preds.cpu(), beta=2, average="weighted")
-
         cm = confusion_matrix(gts.cpu(), preds.cpu())
-        plt.figure(figsize=(10, 7))
         _class_names = (
             self.class_names
             if self.class_names
             else [str(i) for i in range(cm.shape[0])]
         )
+        plt.figure(figsize=(10, 7))
         sns.heatmap(
             cm,
             annot=True,

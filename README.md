@@ -2,6 +2,10 @@
 ### A framework to enable probing of language models.
 ![CI](https://github.com/sharanry/probe-lens/actions/workflows/ci.yaml/badge.svg)
 
+This project aims to provide a generic and extensible framework for probing language models on various tasks. We aim to make it easy to evaluate the activations of language models with respect to a given probing task. 
+
+We aim to offer off-the-shelf task specifications and also provide the ability for users to define their own tasks. This project is designed to work hand-in-hand with [sae-lens](https://github.com/jbloomAus/SAELens) and [transformer-lens](https://github.com/TransformerLensOrg/TransformerLens), ensuring seamless integration and enhanced functionality.
+
 ## API
 ### Example Usage
 

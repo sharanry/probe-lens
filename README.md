@@ -87,3 +87,5 @@ plot = probe.visualize_performance(dataloader)
 - [ ] Add tutorials
 - [ ] Reproduce experiments from major papers (SAE-Spelling, etc.)
 
+## References
+A bunch of the current code is refactored from the [sae-spelling](https://github.com/lasr-spelling/sae-spelling) code repository for the paper [A is for Absorption: Studying Feature Splitting and Absorption in Sparse Autoencoders](https://arxiv.org/abs/2409.14507).
